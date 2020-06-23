@@ -1,7 +1,13 @@
-<div>Teachable Machine Pose Model</div>
-<button type="button" onclick="init()">Start</button>
-<div><canvas id="canvas"></canvas></div>
-<div id="label-container"></div>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Material Starter Kit</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- import Material Icons from Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- import the Material stylesheet -->
+    <link rel="stylesheet" href="bundle.css">
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
 <script type="text/javascript">
@@ -9,7 +15,7 @@
     // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/pose
 
     // the link to your model provided by Teachable Machine export panel
-    const URL = "https://teachablemachine.withgoogle.com/models/MU5tt0Ymd/";
+    const URL = "https://teachablemachine.withgoogle.com/models/vxiow7xHt/";
     let model, webcam, ctx, labelContainer, maxPredictions;
 
     async function init() {
@@ -75,3 +81,24 @@
         }
     }
 </script>
+  </head>
+  <body class="mdc-typography">
+        <div><h1 class="mdc-typography--headline3">
+          Back Mate
+          </h1></div>
+<button class="mdc-button mdc-button--raised" type="button" onclick="init()">Start</button>
+
+    <!-- Apply Material headline3 style to this <h1> element -->
+    
+    <p>
+       A starter kit to get you up and running with Material Components for the Web. <a href="https://glitch.com/~material-starter-kit">Remix and start theming.</a>
+    </p>
+    <br>
+    
+    <div><canvas id="canvas"></canvas></div>
+    <div id="label-container"></div>
+
+    <!-- import the Material javascript file -->
+    <script src="bundle.js" async></script>
+  </body>
+</html>
