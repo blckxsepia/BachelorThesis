@@ -42,20 +42,24 @@
   />
   <!--- Notification ring--->
   <script>
-var audio = document.getElementById("audio");
-audio.src = URL.createObjectURL("https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2FA-Tone-His_Self-1266414414.mp3?v=1596449765553");
-audio.load();
-audio.play();
-
+    var audio = document.getElementById("audio");
+    audio.src = URL.createObjectURL(
+      "https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2FA-Tone-His_Self-1266414414.mp3?v=1596449765553"
+    );
+    audio.load();
+    audio.play();
   </script>
 </head>
 
-<iframe src="https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2FA-Tone-His_Self-1266414414.mp3?v=1596449765553" allow="autoplay" id="audio" style="display:none"></iframe>
+<iframe
+  src="https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2FA-Tone-His_Self-1266414414.mp3?v=1596449765553"
+  allow="autoplay"
+  id="audio"
+  style="display:none"
+></iframe>
 
 <body class="mdc-typography" onload="init()">
-  <header
-    class="mdc-top-app-bar mdc-top-app-bar--fixed mdc-top-app-bar--fixed-scrolled"
-  >
+  <header>
     <div class="mdc-top-app-bar__row">
       <section
         class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start"
@@ -87,9 +91,8 @@ audio.play();
         >
       </section>
     </div>
-    
   </header>
-  
+
   <nav>
     <ul>
       <li><a href="index.html">Home</a></li>
@@ -101,62 +104,102 @@ audio.play();
       <li><a href="stats.html">Statistics</a></li>
     </ul>
   </nav>
-  
-  
-  <div class="mdc-drawer__header">
+
+  <div>
     <h1>Back Mate</h1>
-   <span id="dummy"></span>
+    <span id="dummy"></span>
 
-    
     <!--button--->
-
-   
-    <!--canvas-->
-    <div id="TM">
     <!--->Progressbar</--->
+
     <div id="progressBar">
       <div class="bar"></div>
     </div>
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-    <div><canvas id="canvas"></canvas></div>
-    <div id="label-container"></div>
-    </div>
-    <br />      <button type="button" onclick="history.back()">Back</button>
-
-
-    
-
-     <button class="mdc-button mdc-button--raised" onclick="window.location.href = 'ActiveBreak.html';"><span class="material-icons">
-skip_previous
-</span></button>   
-    <button class="mdc-button mdc-button--raised" onclick="init()">
-      <span class="material-icons">
-play_arrow
-</span>
-    </button> 
-        <button class="mdc-button mdc-button--raised" onclick="hide()">
-      <span class="material-icons">
-pause
-</span>
-    </button>
-    <button class="mdc-button mdc-button--raised" onclick="window.location.href = 'Work.html';"><span class="material-icons">
-skip_next
-</span></button>
-
-    <button class="mdc-button mdc-button--raised" onclick="window.location.href = 'stats.html';"><span class="material-icons">
-bar_chart
-</span></button>
-
-    <footer>
-    
-    </footer>
-
-    <br />
-    
 
     <script>
-      
+      //ProgressBar
+      function progress(timeleft, timetotal, $element) {
+        var x = document.getElementById("TM");
+        var progressBarWidth = (timeleft * $element.width()) / timetotal;
+        $element
+          .find("div")
+          .animate({ width: progressBarWidth }, 500)
+          .html(Math.floor(timeleft / 60) + ":" + (timeleft % 60));
+        if (timeleft > 0 && x.style.display == "block") {
+          setTimeout(function() {
+            progress(timeleft - 1, timetotal, $element);
+          }, 1000);
+        } else {
+          setTimeout(function() {
+            progress(timeleft, timetotal, $element);
+          }, 1000);
+        }
+      }
     </script>
+
+    <!--canvas-->
+    <div id="trainer">
+      <img src="  https://dummyimage.com/330x330/dbdbdb/555557.jpg
+" alt="exercise_var">
+      Exercise: exercise variable
+      Feedback
+    </div>
+    <div id="TM">
+      <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+      <div><canvas id="canvas"></canvas></div>
+      <div id="label-container"></div>
+    </div>
+    <br />
+    <button type="button" onclick="history.back()">Back</button>
+
+    <button
+      class="mdc-button mdc-button--raised"
+      onclick="window.location.href = 'ActiveBreak.html';"
+    >
+      <span class="material-icons">
+        skip_previous
+      </span>
+    </button>
+    <button class="mdc-button mdc-button--raised" onclick="start()">
+      <span class="material-icons">
+        play_arrow
+      </span>
+    </button>
+    <button class="mdc-button mdc-button--raised" onclick="pause()">
+      <span class="material-icons">
+        pause
+      </span>
+    </button>
+
+    <script>
+      function pause() {
+        var x = document.getElementById("TM");
+        x.style.display = "none";
+        webcam.stop();
+      }
+    </script>
+
+    <button
+      class="mdc-button mdc-button--raised"
+      onclick="window.location.href = 'Work.html';"
+    >
+      <span class="material-icons">
+        skip_next
+      </span>
+    </button>
+
+    <button
+      class="mdc-button mdc-button--raised"
+      onclick="window.location.href = 'stats.html';"
+    >
+      <span class="material-icons">
+        bar_chart
+      </span>
+    </button>
+
+    <footer></footer>
+
+    <br />
 
     <!-- import the Material javascript file -->
     <script src="components.dll.js"></script>
@@ -175,10 +218,13 @@ bar_chart
   let model, webcam, ctx, labelContainer, maxPredictions;
 
   async function init() {
+    start();
+    startTimer();
+  }
+  async function start() {
     const modelURL = URL + "model.json";
     const metadataURL = URL + "metadata.json";
-    
-    
+
     // load the model and metadata
     // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
     // Note: the pose library adds a tmPose object to your window (window.tmPose)
@@ -202,25 +248,14 @@ bar_chart
     for (let i = 0; i < maxPredictions; i++) {
       // and class labels
       labelContainer.appendChild(document.createElement("div"));
-     
-    //ProgressBar  
-      function progress(timeleft, timetotal, $element) {
-        var progressBarWidth = (timeleft * $element.width()) / timetotal;
-        $element
-          .find("div")
-          .animate({ width: progressBarWidth }, 500)
-          .html(Math.floor(timeleft / 60) + ":" + (timeleft % 60));
-        if (timeleft > 0) {
-          setTimeout(function() {
-            progress(timeleft - 1, timetotal, $element);
-          }, 1000);
-        }
-      }
-      
-    // Start Progess Bar
-      var durBreak=localStorage.getItem("durBreak")*60;
-      progress(durBreak, durBreak, $("#progressBar"));
     }
+    var x = document.getElementById("TM");
+    x.style.display = "block";
+  }
+
+  function startTimer() {
+    var durBreak = localStorage.getItem("durBreak") * 60;
+    progress(durBreak, durBreak, $("#progressBar"));
   }
 
   async function loop(timestamp) {
@@ -257,16 +292,5 @@ bar_chart
       }
     }
   }
-  function stopWatching() {
-  }
-
-  function hide() {
-  
-    var x = document.getElementById("TM");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-    }
-  }
+  function stopWatching() {}
 </script>
