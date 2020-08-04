@@ -42,43 +42,38 @@
   />
 </head>
 <body class="mdc-typography">
-  <noscript>This Application needs JavaScript. Please activate JavaScript </noscript>
   <header>
     [Logo] Active Breaker
   </header>
-  
-<div class="mdc-menu mdc-menu-surface">
-  <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
-    <li class="mdc-list-item" role="menuitem">
-      <span class="mdc-list-item__ripple"></span>
-      <span class="mdc-list-item__text">A Menu Item</span>
-    </li>
-    <li class="mdc-list-item" role="menuitem">
-      <span class="mdc-list-item__ripple"></span>
-      <span class="mdc-list-item__text">Another Menu Item</span>
-    </li>
-  </ul>
-</div>
-  
- <nav>
+
+  <nav>
     <ul>
       <li><a href="index.html">Home</a></li>
+      <li><a href="form_1workday.html">Settings</a></li>
       <li>
-        <a href="form.html">Settings</a>
+        <a href="form_2numbersActiveBreaks.html">Numbers of Active Breaks</a>
+      </li>
+      <li><a href="form_3zyklus.html">Duration of Work</a></li>
+      <li>
+        <a href="form_4DurationActiveBreak.html">Duration of Active Break</a>
       </li>
       <li><a href="ActiveBreak.html">Start Active Break</a></li>
       <li><a href="Work.html">Start Working</a></li>
       <li><a href="stats.html">Statistics</a></li>
     </ul>
   </nav>
- <section>Welcome to Active Breaker
-  Active Breaker will remind you to stay active while working at your computer.
-  You need: A Webcam, around 2 meter space behind you
-  <img src="  https://dummyimage.com/330x330/dbdbdb/555557.jpg
-" alt="Panda spricht">
-<button class="mdc-button mdc-button--raised" onclick="window.location.href = 'form.html';">start</button>
-  </section>
   
+  <section>
+   <label>How long do you Work today?</label> 
+    <input type="time" id="appt" name="appt"
+       min="00:01" max="24:00" required>
+<small>hours</small>
+    <img src="  https://dummyimage.com/330x330/dbdbdb/555557.jpg
+" alt="Panda spricht">
+    <button type="button" onclick="history.back()">Back</button>
+    <button type="button" class="mdc-button mdc-button--raised" onclick="window.location.href = 'form_2numbersActiveBreaks.html';">Next</button>
+  </section>
+
   <footer>
     <li><a href="readme.md">Documentation</a></li>
     <li><a href="https://github.com/blckxsepia/BachelorThesis">Git</a></li>
@@ -103,7 +98,4 @@
   <!-- import the Material javascript file -->
   <script src="components.dll.js"></script>
   <script src="bundle.js"></script>
-
-   
-  
 </body>

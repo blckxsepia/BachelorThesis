@@ -16,7 +16,7 @@ body {
   width: 90%;
   margin: 10px auto;
   height: 22px;
-  background-color: #0A5F44;
+  background-color: $mdc-theme-primary;
 }
 
 #progressBar div {
@@ -25,7 +25,7 @@ body {
   padding: 0 10px;
   line-height: 22px; /* same as #progressBar height if we want text middle aligned */
   width: 0;
-  background-color: #CBEA00;
+  background-color: #e6e6e6;
   box-sizing: border-box;
 }
 
@@ -56,6 +56,24 @@ body {
     padding: 24px;
     color: rgba(0, 0, 0, .87);
   }
+  
+  #progressBar {
+  width: 90%;
+  margin: 10px auto;
+  height: 22px;
+  background-color: #0A5F44;
+}
+
+#progressBar div {
+  height: 100%;
+  text-align: right;
+  padding: 0 10px;
+  line-height: 22px; /* same as #progressBar height if we want text middle aligned */
+  width: 0;
+  background-color: #CBEA00;
+  box-sizing: border-box;
+}
+
   
   h6 {
     color: rgba(0, 0, 0, .6);

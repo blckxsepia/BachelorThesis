@@ -40,26 +40,13 @@
     sizes="16x16"
     href="https://cdn.glitch.com/9c389208-b279-4e96-bcbc-e5f8712d8706%2Ffavicon-16x16.png?1553712190383"
   />
+
 </head>
 <body class="mdc-typography">
-  <noscript>This Application needs JavaScript. Please activate JavaScript </noscript>
   <header>
     [Logo] Active Breaker
   </header>
-  
-<div class="mdc-menu mdc-menu-surface">
-  <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
-    <li class="mdc-list-item" role="menuitem">
-      <span class="mdc-list-item__ripple"></span>
-      <span class="mdc-list-item__text">A Menu Item</span>
-    </li>
-    <li class="mdc-list-item" role="menuitem">
-      <span class="mdc-list-item__ripple"></span>
-      <span class="mdc-list-item__text">Another Menu Item</span>
-    </li>
-  </ul>
-</div>
-  
+
  <nav>
     <ul>
       <li><a href="index.html">Home</a></li>
@@ -71,14 +58,45 @@
       <li><a href="stats.html">Statistics</a></li>
     </ul>
   </nav>
- <section>Welcome to Active Breaker
-  Active Breaker will remind you to stay active while working at your computer.
-  You need: A Webcam, around 2 meter space behind you
-  <img src="  https://dummyimage.com/330x330/dbdbdb/555557.jpg
-" alt="Panda spricht">
-<button class="mdc-button mdc-button--raised" onclick="window.location.href = 'form.html';">start</button>
+
+  <section>
+    <form id="settings">
+      <label for="durBreak">How many minutes should your Active Break take?</label>
+      <input type="text" id="durBreak" name="durBreak"  value="5" required />
+      <small>minutes</small>
+
+      <label for="durWork">How long do you want to work without Active Break?</label>
+      <input type="text" id="durWork" name="durWork" value="25" required />
+      <small>minutes</small>
+
+      <img
+        src="https://dummyimage.com/330x330/dbdbdb/555557.jpg
+"
+        alt="Panda spricht"
+      />
+      <button type="button" onclick="history.back()">Back</button>
+      <button type="button" id="btnSaveSettings" onclick="saveSettings()">Next</button>
+    </form>
+
+
+    <div id="result"></div>
+
+ <script>
+var form;
+var durWork; 
+var durBreak;
+var durOwnWork;
+var durOwnBreak;
+
+function saveSettings(durWork, durBreak){ 
+  durBreak = document.getElementById("durBreak").value;
+  durWork = document.getElementById("durWork").value;  
+  localStorage.setItem("durBreak", durBreak);
+  localStorage.setItem("durWork", durWork);
+  window.location.href = 'ActiveBreak.html';
+}
+    </script>
   </section>
-  
   <footer>
     <li><a href="readme.md">Documentation</a></li>
     <li><a href="https://github.com/blckxsepia/BachelorThesis">Git</a></li>
@@ -103,7 +121,4 @@
   <!-- import the Material javascript file -->
   <script src="components.dll.js"></script>
   <script src="bundle.js"></script>
-
-   
-  
 </body>
