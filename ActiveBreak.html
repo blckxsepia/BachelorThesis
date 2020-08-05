@@ -41,25 +41,10 @@
     href="https://cdn.glitch.com/9c389208-b279-4e96-bcbc-e5f8712d8706%2Ffavicon-16x16.png?1553712190383"
   />
   <!--- Notification ring--->
-
 </head>
 
 <body class="mdc-typography" onload="init()">
   <div class="main-content">
-    <audio id="aud">
-      <source
-        src="https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2FA-Tone-His_Self-1266414414.mp3?v=1596449765553"
-        type="audio/mpeg"
-        id="bing"
-      />
-    </audio>
-      <script>
-    var aud = document.getElementById("aud");
-    aud.load();
-    aud.autoplay = true;
-    aud.play();
-  </script>
-
     <header>
       <div class="mdc-top-app-bar__row">
         <section
@@ -106,8 +91,23 @@
       </ul>
     </nav>
 
-    <div>
-      <h1>BActiveBreaker</h1>
+    <main>
+      <!--Ping-->
+      <audio id="aud">
+        <source
+          src="https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2FA-Tone-His_Self-1266414414.mp3?v=1596449765553"
+          type="audio/mpeg"
+          id="bing"
+        />
+      </audio>
+      <script>
+        var aud = document.getElementById("aud");
+        aud.load();
+        aud.autoplay = true;
+        aud.play();
+      </script>
+
+      <h1>ActiveBreaker</h1>
       <span id="dummy"></span>
 
       <!--button--->
@@ -135,6 +135,54 @@
               progress(timeleft, timetotal, $element);
             }, 1000);
           }
+        }
+      </script>
+
+      <!-- trainer -->
+      <script>
+        
+      </script>
+      <div id="trainer">
+        <div id="exercises">
+          <div id="exercise">
+        </div>
+          <div id="label">
+          </div>
+      </div>
+      <script>
+        var exercises = [
+            {
+              exerciseName: "Raised Arms",
+              alt: "Raised Arms",
+              url:
+                "https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2Fgif_raised_arms.gif?v=1596619843770"
+            },
+            {
+              exerciseName: "Squad",
+              alt: "Squad",
+              url:
+                "https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2Fgif_squats_red.gif?v=1596619838934"
+            },
+            {
+              exerciseName: "March",
+              alt: "March",
+              url:
+                "https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2Fgif-march-red.gif?v=1596619836208"
+            }
+          ];
+            
+
+        function drawExercise() {
+          exercises.forEach(function(exercises) {
+            var img = document.createElement("img");
+            var p = document.createElement("p");
+            img.src = exercises.url;
+            img.alt = exercises.alt;
+            p.innerHTML = exercises.exerciseName;
+            exercise.appendChild(img);
+            exercise.appendChild(p);
+          });
+
         }
       </script>
 
@@ -199,10 +247,10 @@
       <!-- import the Material javascript file -->
       <script src="components.dll.js"></script>
       <script src="bundle.js"></script>
-    </div>
+    </main>
   </div>
 </body>
-
+<!--TM-->
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
 <script type="text/javascript">
@@ -216,6 +264,7 @@
   async function init() {
     start();
     startTimer();
+    drawExercise();
   }
   async function start() {
     const modelURL = URL + "model.json";
