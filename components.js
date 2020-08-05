@@ -21,3 +21,4 @@ export {MDCTextField} from '@material/textfield';
 export {MDCTextFieldHelperText} from '@material/textfield/helper-text';
 export {MDCTopAppBar} from '@material/top-app-bar';
 export {MDCDataTable} from '@material/data-table';
+export {MDCButton} from '@material/button';

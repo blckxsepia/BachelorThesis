@@ -41,169 +41,165 @@
     href="https://cdn.glitch.com/9c389208-b279-4e96-bcbc-e5f8712d8706%2Ffavicon-16x16.png?1553712190383"
   />
   <!--- Notification ring--->
-  <script>
-    var audio = document.getElementById("audio");
-    audio.src = URL.createObjectURL(
-      "https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2FA-Tone-His_Self-1266414414.mp3?v=1596449765553"
-    );
-    audio.load();
-    audio.play();
-  </script>
+
 </head>
 
-<iframe
-  src="https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2FA-Tone-His_Self-1266414414.mp3?v=1596449765553"
-  allow="autoplay"
-  id="audio"
-  style="display:none"
-></iframe>
-
 <body class="mdc-typography" onload="init()">
-  <header>
-    <div class="mdc-top-app-bar__row">
-      <section
-        class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start"
-      >
-        <a
-          class="material-icons mdc-top-app-bar__navigation-icon mdc-ripple-upgraded mdc-ripple-upgraded--unbounded"
-          style="--mdc-ripple-fg-size:14px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:5px; --mdc-ripple-top:5px;"
-          >menu</a
+  <div class="main-content">
+    <audio id="aud">
+      <source
+        src="https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2FA-Tone-His_Self-1266414414.mp3?v=1596449765553"
+        type="audio/mpeg"
+        id="bing"
+      />
+    </audio>
+      <script>
+    var aud = document.getElementById("aud");
+    aud.load();
+    aud.autoplay = true;
+    aud.play();
+  </script>
+
+    <header>
+      <div class="mdc-top-app-bar__row">
+        <section
+          class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start"
         >
-        <span class="mdc-top-app-bar__title">ActiveBreaker</span>
-      </section>
-      <section
-        class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end"
-        role="toolbar"
-      >
-        <a
-          class="material-icons mdc-icon-button mdc-top-app-bar__action-item mdc-ripple-upgraded mdc-ripple-upgraded--unbounded"
-          aria-label="Share"
-          alt="Share"
-          style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:10px; --mdc-ripple-top:10px;"
-          >share</a
+          <a
+            class="material-icons mdc-top-app-bar__navigation-icon mdc-ripple-upgraded mdc-ripple-upgraded--unbounded"
+            style="--mdc-ripple-fg-size:14px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:5px; --mdc-ripple-top:5px;"
+            >menu</a
+          >
+          <span class="mdc-top-app-bar__title">ActiveBreaker</span>
+        </section>
+        <section
+          class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end"
+          role="toolbar"
         >
-        <a
-          class="material-icons mdc-icon-button mdc-top-app-bar__action-item mdc-ripple-upgraded mdc-ripple-upgraded--unbounded"
-          aria-label="Bookmark this page"
-          alt="Bookmark this page"
-          style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:10px; --mdc-ripple-top:10px;"
-          >bookmark</a
-        >
-      </section>
-    </div>
-  </header>
+          <a
+            class="material-icons mdc-icon-button mdc-top-app-bar__action-item mdc-ripple-upgraded mdc-ripple-upgraded--unbounded"
+            aria-label="Share"
+            alt="Share"
+            style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:10px; --mdc-ripple-top:10px;"
+            >share</a
+          >
+          <a
+            class="material-icons mdc-icon-button mdc-top-app-bar__action-item mdc-ripple-upgraded mdc-ripple-upgraded--unbounded"
+            aria-label="Bookmark this page"
+            alt="Bookmark this page"
+            style="--mdc-ripple-fg-size:28px; --mdc-ripple-fg-scale:1.71429; --mdc-ripple-left:10px; --mdc-ripple-top:10px;"
+            >bookmark</a
+          >
+        </section>
+      </div>
+    </header>
 
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li>
-        <a href="form.html">Settings</a>
-      </li>
-      <li><a href="ActiveBreak.html">Start Active Break</a></li>
-      <li><a href="Work.html">Start Working</a></li>
-      <li><a href="stats.html">Statistics</a></li>
-    </ul>
-  </nav>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li>
+          <a href="form.html">Settings</a>
+        </li>
+        <li><a href="ActiveBreak.html">Start Active Break</a></li>
+        <li><a href="Work.html">Start Working</a></li>
+        <li><a href="stats.html">Statistics</a></li>
+      </ul>
+    </nav>
 
-  <div>
-    <h1>Back Mate</h1>
-    <span id="dummy"></span>
+    <div>
+      <h1>BActiveBreaker</h1>
+      <span id="dummy"></span>
 
-    <!--button--->
-    <!--->Progressbar</--->
+      <!--button--->
+      <!--->Progressbar</--->
 
-    <div id="progressBar">
-      <div class="bar"></div>
-    </div>
+      <div id="progressBar">
+        <div class="bar"></div>
+      </div>
 
-    <script>
-      //ProgressBar
-      function progress(timeleft, timetotal, $element) {
-        var x = document.getElementById("TM");
-        var progressBarWidth = (timeleft * $element.width()) / timetotal;
-        $element
-          .find("div")
-          .animate({ width: progressBarWidth }, 500)
-          .html(Math.floor(timeleft / 60) + ":" + (timeleft % 60));
-        if (timeleft > 0 && x.style.display == "block") {
-          setTimeout(function() {
-            progress(timeleft - 1, timetotal, $element);
-          }, 1000);
-        } else {
-          setTimeout(function() {
-            progress(timeleft, timetotal, $element);
-          }, 1000);
+      <script>
+        //ProgressBar
+        function progress(timeleft, timetotal, $element) {
+          var x = document.getElementById("TM");
+          var progressBarWidth = (timeleft * $element.width()) / timetotal;
+          $element
+            .find("div")
+            .animate({ width: progressBarWidth }, 500)
+            .html(Math.floor(timeleft / 60) + ":" + (timeleft % 60));
+          if (timeleft > 0 && x.style.display == "block") {
+            setTimeout(function() {
+              progress(timeleft - 1, timetotal, $element);
+            }, 1000);
+          } else {
+            setTimeout(function() {
+              progress(timeleft, timetotal, $element);
+            }, 1000);
+          }
         }
-      }
-    </script>
+      </script>
 
-    <!--canvas-->
-    <div id="trainer">
-      <img src="  https://dummyimage.com/330x330/dbdbdb/555557.jpg
-" alt="exercise_var">
-      Exercise: exercise variable
-      Feedback
+      <!--canvas-->
+      <div id="TM">
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+        <div><canvas id="canvas"></canvas></div>
+        <div id="label-container"></div>
+      </div>
+      <br />
+      <button type="mdc-button" onclick="history.back()">Back</button>
+
+      <button
+        class="mdc-button mdc-button--raised"
+        onclick="window.location.href = 'ActiveBreak.html';"
+      >
+        <span class="material-icons">
+          skip_previous
+        </span>
+      </button>
+      <button class="mdc-button mdc-button--raised" onclick="start()">
+        <span class="material-icons">
+          play_arrow
+        </span>
+      </button>
+      <button class="mdc-button mdc-button--raised" onclick="pause()">
+        <span class="material-icons">
+          pause
+        </span>
+      </button>
+
+      <script>
+        function pause() {
+          var x = document.getElementById("TM");
+          x.style.display = "none";
+          webcam.stop();
+        }
+      </script>
+
+      <button
+        class="mdc-button mdc-button--raised"
+        onclick="window.location.href = 'Work.html';"
+      >
+        <span class="material-icons">
+          skip_next
+        </span>
+      </button>
+
+      <button
+        class="mdc-button mdc-button--raised"
+        onclick="window.location.href = 'stats.html';"
+      >
+        <span class="material-icons">
+          bar_chart
+        </span>
+      </button>
+
+      <footer></footer>
+
+      <br />
+
+      <!-- import the Material javascript file -->
+      <script src="components.dll.js"></script>
+      <script src="bundle.js"></script>
     </div>
-    <div id="TM">
-      <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-      <div><canvas id="canvas"></canvas></div>
-      <div id="label-container"></div>
-    </div>
-    <br />
-    <button type="button" onclick="history.back()">Back</button>
-
-    <button
-      class="mdc-button mdc-button--raised"
-      onclick="window.location.href = 'ActiveBreak.html';"
-    >
-      <span class="material-icons">
-        skip_previous
-      </span>
-    </button>
-    <button class="mdc-button mdc-button--raised" onclick="start()">
-      <span class="material-icons">
-        play_arrow
-      </span>
-    </button>
-    <button class="mdc-button mdc-button--raised" onclick="pause()">
-      <span class="material-icons">
-        pause
-      </span>
-    </button>
-
-    <script>
-      function pause() {
-        var x = document.getElementById("TM");
-        x.style.display = "none";
-        webcam.stop();
-      }
-    </script>
-
-    <button
-      class="mdc-button mdc-button--raised"
-      onclick="window.location.href = 'Work.html';"
-    >
-      <span class="material-icons">
-        skip_next
-      </span>
-    </button>
-
-    <button
-      class="mdc-button mdc-button--raised"
-      onclick="window.location.href = 'stats.html';"
-    >
-      <span class="material-icons">
-        bar_chart
-      </span>
-    </button>
-
-    <footer></footer>
-
-    <br />
-
-    <!-- import the Material javascript file -->
-    <script src="components.dll.js"></script>
-    <script src="bundle.js"></script>
   </div>
 </body>
 
@@ -292,5 +288,4 @@
       }
     }
   }
-  function stopWatching() {}
 </script>

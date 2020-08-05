@@ -26,15 +26,12 @@ module.exports = [{
       inject: false
       
     }),
-    new HtmlWebpackPlugin({  
-      filename: 'index_preview.html',
-      template: 'index_preview.html'
-    }),
 
             new HtmlWebpackPlugin({  
       filename: 'form.html',
       template: 'form.html'
     }),
+
         new HtmlWebpackPlugin({  
       filename: 'ActiveBreak.html',
       template: 'ActiveBreak.html'

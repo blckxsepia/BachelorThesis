@@ -1,4 +1,5 @@
 import {
+  MDCButton,
   MDCCheckbox,
   MDCChipSet,
   MDCDialog,
@@ -34,8 +35,9 @@ const mainEl = document.querySelector('.main-content');
 const buttonEls = Array.from(mainEl.querySelectorAll('.mdc-button'));
 buttonEls.forEach((el) => new MDCRipple(el));
 
+
 // Icon button toggle
-const iconToggleEl = mainEl.querySelector('#icon-toggle-button');
+const iconToggleEl = mainEl.querySelector('.mdc-icon-button');
 const iconToggle = new MDCIconButtonToggle(iconToggleEl);
 iconToggle.unbounded = true;
 
