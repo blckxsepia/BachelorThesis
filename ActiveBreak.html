@@ -119,9 +119,13 @@
 
       <script>
         //ProgressBar
+
         function progress(timeleft, timetotal, $element) {
+          // console.log(timeleft, timetotal);
           var x = document.getElementById("TM");
           var progressBarWidth = (timeleft * $element.width()) / timetotal;
+
+          drawExercise(timeleft);
           $element
             .find("div")
             .animate({ width: progressBarWidth }, 500)
@@ -139,18 +143,22 @@
       </script>
 
       <!-- trainer -->
-      <script>
-        
-      </script>
+      <script></script>
       <div id="trainer">
         <div id="exercises">
           <div id="exercise">
-        </div>
-          <div id="label">
+            <img>
+            <p>
+              
+            </p>
           </div>
+          <div id="label"></div>
+        </div>
       </div>
       <script>
-        var exercises = [
+        var i=0;
+        function drawExercise(timeleft) {
+          var exercises = [
             {
               exerciseName: "Raised Arms",
               alt: "Raised Arms",
@@ -170,20 +178,28 @@
                 "https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2Fgif-march-red.gif?v=1596619836208"
             }
           ];
-            
+          //exercises.forEach(function(exercises) {
+          //for(i=0;i<exercises.length;i++)
 
-        function drawExercise() {
-          exercises.forEach(function(exercises) {
-            var img = document.createElement("img");
-            var p = document.createElement("p");
-            img.src = exercises.url;
-            img.alt = exercises.alt;
-            p.innerHTML = exercises.exerciseName;
-            exercise.appendChild(img);
-            exercise.appendChild(p);
-          });
+          var img = document.createElement("img");
+          var p = document.createElement("p");
 
+          var x = timeleft % intervall;
+      
+        
+          if (x == intervall - 1) {
+            img.src = exercises[i].url; //url
+            img.alt = exercises[i].alt; //alt
+            p.innerHTML = exercises[i].exerciseName; //label
+            var prevImg=document.getElementById("exercise").childNodes[0];
+            var prevP=document.getElementById("exercise").childNodes[1];
+            exercise.replaceChild(img, prevImg);
+            exercise.replaceChild(p, prevP);
+            i++;
+          }
         }
+
+        //  });
       </script>
 
       <!--canvas-->
@@ -203,7 +219,7 @@
           skip_previous
         </span>
       </button>
-      <button class="mdc-button mdc-button--raised" onclick="start()">
+      <button class="mdc-button mdc-button--raised" onclick="startTM()">
         <span class="material-icons">
           play_arrow
         </span>
@@ -261,12 +277,16 @@
   const URL = "https://teachablemachine.withgoogle.com/models/vxiow7xHt/";
   let model, webcam, ctx, labelContainer, maxPredictions;
 
+  var numberOfExercises = 3; //(länge des Arrays)
+  var durBreak = localStorage.getItem("durBreak") * 60;
+  var timeleft = durBreak;
+  const intervall = timeleft / numberOfExercises;
+
   async function init() {
-    start();
-    startTimer();
-    drawExercise();
+    startTM();
+    progress(durBreak, durBreak, $("#progressBar"));
   }
-  async function start() {
+  async function startTM() {
     const modelURL = URL + "model.json";
     const metadataURL = URL + "metadata.json";
 
@@ -296,11 +316,6 @@
     }
     var x = document.getElementById("TM");
     x.style.display = "block";
-  }
-
-  function startTimer() {
-    var durBreak = localStorage.getItem("durBreak") * 60;
-    progress(durBreak, durBreak, $("#progressBar"));
   }
 
   async function loop(timestamp) {
