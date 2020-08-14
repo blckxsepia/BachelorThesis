@@ -3,7 +3,7 @@
 
 // Button
 .mdc-button {
-   @include mdc-button-shape-radius(50%);
+   @include mdc-button-shape-radius(5%);
  }
 
 // Checkbox and radio
@@ -11,6 +11,8 @@
 .mdc-checkbox, .mdc-radio {
   margin-right: 4px;
 }
+
+
 
 // Switch
 

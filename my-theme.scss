@@ -22,20 +22,20 @@ $mdc-shape-large-component-radius: 10px;
 
 // Primary colors ($mdc-theme-primary) map to components such as app bars and buttons, while secondary colors ($mdc-theme-secondary) are used as accents on components such as FABs and selection controls.
 
-$mdc-theme-primary: #255F53;
-$mdc-theme-secondary: #8BCEA6;
+$mdc-theme-primary: #100E15;
+$mdc-theme-secondary: #100E15;
 
 
 // Theme background ($mdc-theme-background) appears behind scrollable content. Surface color ($mdc-theme-surface) is mapped to the surface of components such as cards, sheets, and menus. Error color ($mdc-theme-error) is used to indicate an error state for components such as text fields provided with inaccurate input.
 
-// $mdc-theme-surface: #8BCEA6;
-// $mdc-theme-background: #FBFBFF;
-// $mdc-theme-error: #DE713D;
+// $mdc-theme-surface: #100E15;
+// $mdc-theme-background: #100E15;
+// $mdc-theme-error: #100E15;
 
 
 // “On-” colors define how text, icons, and strokes are colored in relation to the surface on which they appear. If you are updating these manually, be sure to consider accessible color contrast for the value pairs.
 
-// $mdc-theme-on-primary: #FBFBFF;
-// $mdc-theme-on-secondary: #FBFBFF;
-// $mdc-theme-on-error: #FBFBFF;
-// $mdc-theme-on-surface: #13171A;
+// $mdc-theme-on-primary: #100E15;
+// $mdc-theme-on-secondary: #100E15;
+// $mdc-theme-on-error: #100E15;
+// $mdc-theme-on-surface: #100E15;

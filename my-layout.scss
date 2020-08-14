@@ -4,7 +4,6 @@ body {
   display: flex;
   margin: 0;
 }
-
 .remix-fab {
   position: fixed;
   right: 24px;
@@ -13,7 +12,7 @@ body {
   
 }
 #progressBar {
-  width: 90%;
+  width: 100%;
   margin: 10px auto;
   height: 22px;
   background-color: $mdc-theme-primary;
@@ -25,10 +24,13 @@ body {
   padding: 0 10px;
   line-height: 22px; /* same as #progressBar height if we want text middle aligned */
   width: 0;
-  background-color: #e6e6e6;
+  background-color: $mdc-theme-background;
   box-sizing: border-box;
 }
 
+  #exercise > img{
+    width:100%;
+  }
 
 
 // Theme Builder drawer content
@@ -58,7 +60,7 @@ body {
   }
   
   #progressBar {
-  width: 90%;
+  width: 100%;
   margin: 10px auto;
   height: 22px;
   background-color: #0A5F44;
@@ -73,6 +75,7 @@ body {
   background-color: #CBEA00;
   box-sizing: border-box;
 }
+  
 
   
   h6 {
