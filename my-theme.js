@@ -1,4 +1,3 @@
 // Enter your theme name here!
-const themeName = "ActiveBreaker";
+const themeName = "activeBreaker";
 export default themeName;
-

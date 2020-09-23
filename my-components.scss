@@ -1,18 +1,18 @@
 // Material Theming
 // After importing all MDC Web components, apply mixins to theme individual components
 
-// Button
-.mdc-button {
-   @include mdc-button-shape-radius(5%);
- }
+// .mdc-button {
+//   @include mdc-button-shape-radius(50%);
+// }
+
+
 
 // Checkbox and radio
+
 
 .mdc-checkbox, .mdc-radio {
   margin-right: 4px;
 }
-
-
 
 // Switch
 

@@ -3,7 +3,55 @@
 body {
   display: flex;
   margin: 0;
+  background-color:#FFCF00;
 }
+.navbar-expand-lg .navbar-collapse{
+  display:inline-flex !important;
+}
+main{
+  width:100%;
+}
+h1, h2, h3, h4, h5, h6{
+  font-family: flood-std, sans-serif;
+
+font-weight: 400;
+
+font-style: normal;
+
+
+}
+.content{
+  margin-top:3.5rem;
+}
+
+.card{
+  border:none;
+  background-color:#FDF2EE;
+  margin-bottom:1rem;
+}
+
+.logos img {
+  height:50px;
+}
+
+.logo{
+  width:216px;
+}
+.navbar {
+  padding:1.5rem 1.5rem !important;
+}
+.bg-primary{
+  background-color:#410F57 !important;
+}
+
+.navbar-dark .navbar-nav .nav-link  {
+  color:#FFCF00;
+}
+
+.icons img{
+  height:50px;
+}
+
 .remix-fab {
   position: fixed;
   right: 24px;
@@ -11,27 +59,10 @@ body {
   z-index: 200;
   
 }
-#progressBar {
-  width: 100%;
-  margin: 10px auto;
-  height: 22px;
-  background-color: $mdc-theme-primary;
+.mdc-typography{
+  font-family: 'Source Sans Pro', sans-serif;
+  color:#410F57;
 }
-
-#progressBar div {
-  height: 100%;
-  text-align: right;
-  padding: 0 10px;
-  line-height: 22px; /* same as #progressBar height if we want text middle aligned */
-  width: 0;
-  background-color: $mdc-theme-background;
-  box-sizing: border-box;
-}
-
-  #exercise > img{
-    width:100%;
-  }
-
 
 // Theme Builder drawer content
 
@@ -58,25 +89,6 @@ body {
     padding: 24px;
     color: rgba(0, 0, 0, .87);
   }
-  
-  #progressBar {
-  width: 100%;
-  margin: 10px auto;
-  height: 22px;
-  background-color: #0A5F44;
-}
-
-#progressBar div {
-  height: 100%;
-  text-align: right;
-  padding: 0 10px;
-  line-height: 22px; /* same as #progressBar height if we want text middle aligned */
-  width: 0;
-  background-color: #CBEA00;
-  box-sizing: border-box;
-}
-  
-
   
   h6 {
     color: rgba(0, 0, 0, .6);

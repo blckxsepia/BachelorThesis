@@ -1,4 +1,16 @@
 <head>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
+  <script src="components.dll.js"></script>
+  <script src="bundle.js"></script>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+  />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <title>Active Breaker</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -12,13 +24,11 @@
     href="https://fonts.googleapis.com/icon?family=Material+Icons"
   />
   <link
-    href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:900i"
+    href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;400&display=swap"
     rel="stylesheet"
   />
-  <link
-    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
-    rel="stylesheet"
-  />
+  <link rel="stylesheet" href="https://use.typekit.net/cub6ikz.css" />
+
   <!-- import the Material stylesheet -->
   <link rel="stylesheet" href="bundle.css" />
   <!-- Add favicons -->
@@ -26,63 +36,114 @@
     rel="icon"
     type="image/png"
     sizes="32x32"
-    href="https://cdn.glitch.com/9c389208-b279-4e96-bcbc-e5f8712d8706%2Ffavicon-32x32.png?1553712190412"
+    href="https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2Ficon_purple%20Kopie.png?v=1600774253386"
   />
   <link
     rel="icon"
     type="image/png"
     sizes="96x96"
-    href="https://cdn.glitch.com/9c389208-b279-4e96-bcbc-e5f8712d8706%2Ffavicon-96x96.png?1553712190613"
+    href="https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2Ficon_purple%20Kopie.png?v=1600774253386"
   />
   <link
     rel="icon"
     type="image/png"
     sizes="16x16"
-    href="https://cdn.glitch.com/9c389208-b279-4e96-bcbc-e5f8712d8706%2Ffavicon-16x16.png?1553712190383"
+    href="https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2Ficon_purple%20Kopie.png?v=1600774253386"
   />
+  <!--- Notification ring--->
 </head>
 <body class="mdc-typography">
-  <div class="main-content">
-  <header>
-    [Logo] Active Breaker
-  </header>
+  <main>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary ">
+      <!-- Brand -->
+      <div class="w-100 d-flex justify-content-center align-items-center">
+        <div class="w-75">
+          <a href="index.html">
+            <img
+              class="logo"
+              src="https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2FLogo_yellow.svg?v=1599828090547
+"
+              alt="ActiveBreakerLogo"
+            />
+          </a>
 
- <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
+          <!-- Toggler/collapsibe Button -->
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#collapsibleNavbar"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <!-- Navbar links -->
+          <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Tutorial</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="form.html">Settings</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="ActiveBreak.html">Play</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="stats.html">Statistics</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="content d-flex justify-content-center align-items-center">
+      <div class="card w-75">
+        <div class="card-body">
+          <section>
+            <h1>
+              Your Statistic
+            </h1>
+            <p>
+              placeholder
+            </p>
+            <br />
+
+            <button
+              class="mdc-button mdc-button--raised"
+              onclick="window.location.href = 'form.html';"
+            >
+              Play
+            </button>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <li><a href="readme.md">Documentation</a></li>
+      <li><a href="https://github.com/blckxsepia/BachelorThesis">Git</a></li>
+      <li><a href="/index_preview.html">link to bootstrap doku</a></li>
       <li>
-        <a href="form.html">Settings</a>
+        <a href="https://www.tensorflow.org/guide">link to tensor flow </a>
       </li>
-      <li><a href="ActiveBreak.html">Start Active Break</a></li>
-      <li><a href="Work.html">Start Working</a></li>
-      <li><a href="stats.html">Statistics</a></li>
-    </ul>
-  </nav>
- <section>Your Stats</section>
-  
-  <footer>
-    <li><a href="readme.md">Documentation</a></li>
-    <li><a href="https://github.com/blckxsepia/BachelorThesis">Git</a></li>
-    <li><a href="/index_preview.html">link to bootstrap doku</a></li>
-    <li>
-      <a href="https://www.tensorflow.org/guide">link to tensor flow </a>
-    </li>
-    <li>
-      <a href="https://github.com/tensorflow/tfjs-models/tree/master/posenet"
-        >pose net</a
-      >
-    </li>
-    <li>
-      <a
-        href="https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/pose"
-        >google teachable maschine
-      </a>
-    </li>
-    &#169; 2020 Pia Korndörfer
-  </footer>
+      <li>
+        <a href="https://github.com/tensorflow/tfjs-models/tree/master/posenet"
+          >pose net</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/pose"
+          >google teachable maschine
+        </a>
+      </li>
+      &#169; 2020 Pia Korndörfer
+    </footer>
 
-  <!-- import the Material javascript file -->
-  <script src="components.dll.js"></script>
-  <script src="bundle.js"></script>
-  </div>
+    <!-- import the Material javascript file -->
+    <script src="components.dll.js"></script>
+    <script src="bundle.js"></script>
+  </main>
 </body>
