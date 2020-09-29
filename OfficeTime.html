@@ -52,7 +52,7 @@
   />
   <!--- Notification ring--->
 </head>
-<body class="mdc-typography">
+<body class="mdc-typography" onload="init()">
   <main>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary ">
       <!-- Brand -->
@@ -99,69 +99,136 @@
       </div>
     </nav>
     <div class="content d-flex justify-content-center align-items-center">
-      
-    <div class="card w-75">
-      <div class="card-body">
-        <section>
-          <h1>
-            Move, Play, Stay Fit
-          </h1>
-          <p>
-            Active Breaker takes care of your physical needs by increasing the
-            motivation, regularity and enjoyment of physical braks in your
-            office job
-          </p>
-          e
-          <h2>
-            Used Technologies
-          </h2>
-          <p>
-            Developed with basic web development technologies such as HTML5,
-            JavaScript and Bootstrap. Supplemented with the TensorFlow framework
-            for pose detection. Made available on Glitch an online IDE for
-            JavaScript and node.js
-          </p>
-          <div class="logos">
-            <img
-              src="https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2Flogos_html-5.svg?v=1599828309295"
-            />
-            <img
-              src="https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2Flogos_javascript.svg?v=1599828309420"
-            />
-            <img
-              src="https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2FNode.js_logo.svg?v=1599828309908"
-            />
-            <img
-              src="https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2Flogo_bootstrap.svg?v=1599828308987"
-            />
-            <img
-              src="https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2Flogos-tensorflow.svg?v=1599828309600"
-            />
-            <img
-              src="https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2Flogos_glitch.svg?v=1599828310158"
-            />
-            <img
-              src="https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2Flogos_figma.svg?v=1599828309162"
-            />
-          </div>
+      <div class="w-75">
+        <audio id="aud">
+          <source
+            src="https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2FA-Tone-His_Self-1266414414.mp3?v=1596449765553"
+            type="audio/mpeg"
+            id="bing"
+          />
+        </audio>
 
-          <br />
+        <div class="row">
+          <div class="col">
+            <div class="card">
+              <h1>
+                Office Time!
+              </h1>
+              <div id="timeleft"></div>
+            </div>
+            <script>
+              //InitScript
+              var isPlaying = true;
+              async function init() {
+                //ausführungen beim starten
+                startTimer();
+              }
+              async function startTimer() {
+                progress(durBreak, durBreak);
+              }
+              //Timer Skript
 
-          <button
-            class="mdc-button mdc-button--raised"
-            onclick="window.location.href = 'form.html';"
-          >
-            Play
-          </button>
-          <div class="icons">
-            
+              var durBreak = localStorage.getItem("durWork") * 60;
+
+              var timeleft = durBreak;
+              var timetotal;
+              function progress(timeleft, timetotal) {
+                if (timeleft > 0 && isPlaying == true) {
+                  setTimeout(function() {
+                    progress(timeleft - 1, timetotal);
+                  }, 1000);
+                } else if (timeleft == 0) {
+                  setTimeout(function() {
+                    progress(timeleft, timetotal);
+                  }, 1000);
+                  skip();
+                } else {
+                  setTimeout(function() {
+                    progress(timeleft, timetotal);
+                  }, 1000);
+                }
+                document.getElementById("timeleft").innerHTML =
+                  "Your next ActiveBreaks starts in: " +
+                  Math.floor(timeleft / 60) +
+                  ":" +
+                  (timeleft % 60);
+              }
+              function skip() {
+                window.location.href = "ActiveBreak.html";
+              }
+            </script>
           </div>
-        </section>
+          <div class="w-100"></div>
+          <div class="row">
+            <div class="col">
+              <button
+                class="mdc-button mdc-button--raised"
+                onclick="window.location.href = 'ActiveBreak.html';"
+              >
+                <span class="material-icons">
+                  repeat
+                </span>
+              </button>
+            </div>
+            <div class="col">
+              <button
+                id="play"
+                class="mdc-button mdc-button--raised"
+                onclick="play()"
+                style="display:none;"
+              >
+                <span class="material-icons">
+                  play_arrow
+                </span>
+              </button>
+              <button
+                class="mdc-button mdc-button--raised"
+                id="pause"
+                onclick="pause()"
+              >
+                <span class="material-icons">
+                  pause
+                </span>
+              </button>
+            </div>
+            <div class="col">
+              <button class="mdc-button mdc-button--raised" onclick="skip()">
+                <span class="material-icons">
+                  skip_next
+                </span>
+              </button>
+            </div>
+            <div class="col">
+              <button
+                class="mdc-button mdc-button--raised"
+                onclick="window.location.href = 'stats.html';"
+              >
+                <span class="material-icons">
+                  bar_chart
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+
+      <script>
+        function pause() {
+          isPlaying = false;
+          document.getElementById("pause").style.display = "none";
+          document.getElementById("play").style.display = "block";
+        }
+
+        function play() {
+          isPlaying = true;
+          document.getElementById("pause").style.display = "block";
+          document.getElementById("play").style.display = "none";
+        }
+        //Button Skirpt  
+      </script>
     </div>
 
-       <footer class="w-100 d-flex justify-content-center align-items-center fixed-bottom bg-primary">
+    <footer class="w-100 d-flex justify-content-center align-items-center fixed-bottom bg-primary">
       <li><a href="readme.md">Documentation</a></li>
       <li><a href="https://github.com/blckxsepia/BachelorThesis">Git</a></li>
       <li><a href="/index_preview.html">link to bootstrap doku</a></li>
@@ -181,6 +248,7 @@
       </li>
       &#169; 2020 Pia Korndörfer
     </footer>
+    
 
     <!-- import the Material javascript file -->
     <script src="components.dll.js"></script>

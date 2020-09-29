@@ -24,13 +24,11 @@
     href="https://fonts.googleapis.com/icon?family=Material+Icons"
   />
   <link
-    href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:900i"
+    href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;400&display=swap"
     rel="stylesheet"
   />
-  <link
-    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
-    rel="stylesheet"
-  />
+  <link rel="stylesheet" href="https://use.typekit.net/cub6ikz.css" />
+
   <!-- import the Material stylesheet -->
   <link rel="stylesheet" href="bundle.css" />
   <!-- Add favicons -->
@@ -54,7 +52,6 @@
   />
   <!--- Notification ring--->
 </head>
-
 <body class="mdc-typography" onload="init()">
   <main>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary ">
@@ -101,481 +98,511 @@
         </div>
       </div>
     </nav>
-    <br />
+    <div class="content d-flex justify-content-center align-items-center">
+      <div class="w-75">
+        <audio id="aud">
+          <source
+            src="https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2FA-Tone-His_Self-1266414414.mp3?v=1596449765553"
+            type="audio/mpeg"
+            id="bing"
+          />
+        </audio>
+        <h1>
+          <div id="timeleft"></div>
+          <script>
+            //InitScript
+            var isPlaying = true;
 
-    <!--Ping-->
-    <audio id="aud">
-      <source
-        src="https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2FA-Tone-His_Self-1266414414.mp3?v=1596449765553"
-        type="audio/mpeg"
-        id="bing"
-      />
-    </audio>
+            const URL =
+              "https://teachablemachine.withgoogle.com/models/vxiow7xHt/";
+            let model, webcam, ctx, labelContainer, maxPredictions;
+            var indexExercises = 0;
+            var difficulty = 4;
+            async function init() {
+              //ausführungen beim starten
+              startTM();
+              setTimeout(2000);
+              startTimerAndGame();
+            }
+            async function startTimerAndGame() {
+              var gameLoopInterval = setInterval(gameLoop, difficulty * 100);
+              progress(durBreak, durBreak);
+            }
+            //Timer Skript
 
-    <!--button--->
-    <div class="container">
-      <div id="nextExercise"></div>
-      <div id="progressBar">
-        <div class="bar"></div>
-      </div>
+            var durBreak = localStorage.getItem("durBreak") * 60;
 
-      <!-- trainer -->
-
-      <div class="container-fluid">
-        <div class="container-fluid">
-          <!-- Control the column width, and how they should appear on different devices -->
-          <div class="row">
-            <div class="col-sm-6">
-              <div id="TM">
-                <div><canvas id="canvas"></canvas></div>
-                <div id="exerciseName">"</div>
-                <div id="feedback">
-                  <p></p>
-                </div>
-                <div id="label-container"></div>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div id="trainer">
-                <div id="exercise">
-                  <img />
-                  <p></p>
-                </div>
-              </div>
-            </div>
+            var timeleft = durBreak;
+            var timetotal;
+            function progress(timeleft, timetotal) {
+              if (timeleft > 0 && isPlaying == true) {
+                setTimeout(function() {
+                  progress(timeleft - 1, timetotal);
+                }, 1000);
+              }
+              else if (timeleft == 0) {
+                setTimeout(function() {
+                  progress(timeleft, timetotal);
+                }, 1000);
+                skip();
+              } 
+              else {
+                setTimeout(function() {
+                  progress(timeleft, timetotal);
+                }, 1000);
+              }
+              document.getElementById("timeleft").innerHTML =
+                "Time Left: " +
+                Math.floor(timeleft / 60) +
+                ":" +
+                (timeleft % 60);
+            }
+          </script>
+          <script>
+            //Highscore Skript
+          </script>
+          <div id="Highscore"></div>
+        </h1>
+        <div class="row">
+          <div class="col">
+            <canvas id="myCanvas" class="card"></canvas>
           </div>
-          <br />
+          <script>
+            //Game Skirpt
+
+            const Direction = {
+              UP: 1,
+              RIGHT: 2,
+              DOWN: 3,
+              LEFT: 4
+            };
+
+            var tileSize = 10;
+            var nrOfTilesInX = 50;
+            var nrOfTilesInY = 30;
+
+            var snakeColor = "#FFCF00";
+            var snakeX = 2;
+            var snakeY = 2;
+            var snakeDirection = Direction.RIGHT;
+
+            var foodColor = "#410F57";
+            var foodX = getRandomNumber(0, nrOfTilesInX - 1);
+            var foodY = getRandomNumber(0, nrOfTilesInY - 1);
+
+            var score = 0;
+
+            /*******************************************************
+             * CANVAS VARIABLES
+             *******************************************************/
+
+            var canvas = document.getElementById("myCanvas");
+            var ctx2 = canvas.getContext("2d");
+
+            ctx2.canvas.width = nrOfTilesInX * tileSize;
+            ctx2.canvas.height = nrOfTilesInY * tileSize;
+
+            /*******************************************************
+             * GAME LOOP
+             *******************************************************/
+
+            function gameLoop() {
+              clearCanvas();
+              if (isPlaying) {
+                moveSnake();
+              }
+
+              checkFoodCollision();
+              checkWallCollision();
+
+              // draw snake
+              fillTile(snakeX, snakeY, snakeColor);
+
+              // draw food
+              fillTile(foodX, foodY, foodColor);
+
+              document.getElementById("Highscore").innerHTML =
+                "Score: " + score;
+            }
+
+            /*******************************************************
+             * GAME LOGIC FUNCTIONS
+             *******************************************************/
+
+            function moveSnake() {
+              if (snakeDirection == Direction.UP) {
+                snakeY = snakeY - 1;
+              } else if (snakeDirection == Direction.RIGHT) {
+                snakeX = snakeX + 1;
+              } else if (snakeDirection == Direction.DOWN) {
+                snakeY = snakeY + 1;
+              } else if (snakeDirection == Direction.LEFT) {
+                snakeX = snakeX - 1;
+              }
+            }
+
+            function checkFoodCollision() {
+              if (snakeX == foodX && snakeY == foodY) {
+                score = score + 1;
+                while (difficulty >= 1.5) {
+                  difficulty = difficulty - 0.3;
+                }
+                generateNewFood();
+              }
+            }
+
+            function generateNewFood() {
+              foodX = getRandomNumber(0, nrOfTilesInX - 1);
+              foodY = getRandomNumber(0, nrOfTilesInY - 1);
+            }
+
+            function gameOver() {
+              drawText(
+                "Game over!",
+                "60px Arial black",
+                "black",
+                canvas.width / 2 - 200,
+                canvas.height / 2
+              );
+              clearInterval(gameLoopInterval);
+            }
+
+            function checkWallCollision() {
+              // in X direction
+              if (snakeX < 0) {
+                snakeX = nrOfTilesInX;
+              }
+              if (snakeX > nrOfTilesInX) {
+                snakeX = 0;
+              }
+              if (snakeY < 0) {
+                snakeY = nrOfTilesInY;
+              }
+
+              // in Y direction
+              if (snakeY > nrOfTilesInY) {
+                snakeY = 0;
+              }
+            }
+
+            /*******************************************************
+             * DRAWING FUNCTIONS
+             *******************************************************/
+
+            function fillTile(x, y, color) {
+              ctx2.beginPath();
+              ctx2.rect(x * tileSize, y * tileSize, tileSize, tileSize);
+              ctx2.fillStyle = color;
+              ctx2.fill();
+              ctx2.closePath();
+            }
+
+            function clearCanvas() {
+              ctx2.clearRect(0, 0, canvas.width, canvas.height);
+            }
+
+            function drawText(text, font, color, x, y) {
+              ctx2.beginPath();
+              ctx2.font = font;
+              ctx2.fillStyle = color;
+              ctx2.fillText(text, x, y);
+              ctx2.closePath();
+            }
+
+            /*******************************************************
+             * USER INTERACTION FUNCTIONS
+             *******************************************************/
+
+            function controlSnake(currentPose) {
+              if (currentPose.className == "RaisedArms") {
+                //up
+                snakeDirection = Direction.UP;
+              } else if (currentPose.className == "wallsit") {
+                //right
+                snakeDirection = Direction.RIGHT;
+              } else if (currentPose.className == "pause") {
+                //down
+                snakeDirection = Direction.DOWN;
+              } else if (currentPose.className == "standing") {
+                //left
+                snakeDirection = Direction.LEFT;
+              }
+            }
+
+            /*******************************************************
+             * HELPER FUNCTIONS
+             *******************************************************/
+
+            function getRandomNumber(start, end) {
+              return Math.ceil(Math.random() * (end - start) + start);
+            }
+          </script>
+
+          <div class="col">
+            <script>
+              async function startTM() {
+                const modelURL = URL + "model.json";
+                const metadataURL = URL + "metadata.json";
+
+                // load the model and metadata
+                // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
+                // Note: the pose library adds a tmPose object to your window (window.tmPose)
+                model = await tmPose.load(modelURL, metadataURL);
+                maxPredictions = model.getTotalClasses();
+
+                // Convenience function to setup a webcam
+                const size = document.getElementById("myCanvas").width;
+                const flip = true; // whether to flip the webcam
+                webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
+                await webcam.setup(); // request access to the webcam
+                await webcam.play();
+                window.requestAnimationFrame(loop);
+
+                // append/get elements to the DOM
+                const canvas = document.getElementById("canvas");
+                canvas.width = size;
+                canvas.height = size;
+                ctx = canvas.getContext("2d");
+                labelContainer = document.getElementById("label-container");
+                for (let i = 0; i < maxPredictions; i++) {
+                  // and class labels
+                  //labelContainer.appendChild(document.createElement("div"));
+                }
+                TM.style.display = "block";
+              }
+              async function loop(timestamp) {
+                webcam.update(); // update the webcam frame
+                await predict();
+                window.requestAnimationFrame(loop);
+              }
+
+              var currentPose;
+
+              async function predict() {
+                // Prediction #1: run input through posenet
+                // estimatePose can take in an image, video or canvas html element
+                const { pose, posenetOutput } = await model.estimatePose(
+                  webcam.canvas
+                );
+                // Prediction 2: run input through teachable machine classification model
+                const prediction = await model.predict(posenetOutput);
+                var probability = prediction[indexExercises].probability;
+                currentPose = getMax(prediction);
+                //var max = Math.max.apply(Math, prediction.map(function(o) { return o.className; }))// Array Prediction wird in Map geschrieben und nach Maximum durchsucht
+                showFeedback(probability, currentPose.className);
+                controlSnake(currentPose);
+
+                for (let i = 0; i < maxPredictions; i++) {
+                  const classPrediction =
+                    prediction[i].className +
+                    ": " +
+                    prediction[i].probability.toFixed(2);
+                  //labelContainer.childNodes[i].innerHTML = classPrediction;
+                }
+
+                // finally draw the poses
+                drawPose(pose);
+              }
+
+              function getMax(prediction) {
+                var max;
+                for (var i = 0; i < prediction.length; i++) {
+                  if (
+                    max == null ||
+                    parseInt(prediction[i].probability.toFixed(2)) >
+                      parseInt(max.probability.toFixed(2))
+                  )
+                    max = prediction[i];
+                }
+                return max;
+              }
+
+              function showFeedback(probability, currentPose) {
+                var exerciseId = exercises[indexExercises].exerciseId;
+                document.getElementById("exerciseName").innerHTML =
+                  "name: " + currentPose;
+              }
+
+              function drawPose(pose) {
+                if (webcam.canvas) {
+                  ctx.drawImage(webcam.canvas, 0, 0);
+                  // draw the keypoints and skeleton
+                  if (pose) {
+                    const minPartConfidence = 0.5;
+                    tmPose.drawKeypoints(
+                      pose.keypoints,
+                      minPartConfidence,
+                      ctx
+                    );
+                    tmPose.drawSkeleton(pose.keypoints, minPartConfidence, ctx);
+                  }
+                }
+              }
+              var aud = document.getElementById("aud");
+              aud.load();
+              aud.autoplay = true;
+              aud.play();
+
+              var exercises = [
+                {
+                  exerciseId: "raisedArms",
+                  exerciseName: "Raised Arms",
+                  alt: "Raised Arms",
+                  url:
+                    "https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2Fgif_raised_arms.gif?v=1596619843770"
+                },
+                {
+                  exerciseId: "wallsit",
+                  exerciseName: "Squad",
+                  alt: "Squad",
+                  url:
+                    "https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2Fgif_squats_red.gif?v=1596619838934"
+                },
+                {
+                  exerciseId: "march",
+                  exerciseName: "March",
+                  alt: "March",
+                  url:
+                    "https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2Fgif-march-red.gif?v=1596619836208"
+                }
+              ];
+              var numberOfExercises = exercises.length;
+            </script>
+            <div id="TM">
+              <div id="infoButtons">
+                <div class="row" style="height:100%">
+                  <div class="col"></div>
+                  <div class="col">
+                    <img src="https://dummyimage.com/48/000000/fff.png" />
+                  </div>
+                  <div class="col"></div>
+                  <div class="w-100"></div>
+                  <div class="col">
+                    <img src="https://dummyimage.com/48/000000/fff.png" />
+                  </div>
+                  <div class="col"></div>
+                  <div class="col">
+                    <img src="https://dummyimage.com/48/000000/fff.png" />
+                  </div>
+                  <div class="w-100"></div>
+                  <div class="col"></div>
+                  <div class="col">
+                    <img src="https://dummyimage.com/48/000000/fff.png" />
+                  </div>
+                  <div class="col"></div>
+                </div>
+              </div>
+
+              <script>
+                var TM = document.getElementById("TM");
+              </script>
+              <canvas id="canvas"></canvas>
+            </div>
+            <div id="exerciseName">"</div>
+          </div>
+        </div>
+        <div class="w-100"></div>
+        <div class="row">
+          <div class="col">
+            <button
+              class="mdc-button mdc-button--raised"
+              onclick="window.location.href = 'ActiveBreak.html';"
+            >
+              <span class="material-icons">
+                repeat
+              </span>
+            </button>
+          </div>
+          <div class="col">
+            <button
+              id="play"
+              class="mdc-button mdc-button--raised"
+              onclick="play()"
+              style="display:none;"
+            >
+              <span class="material-icons">
+                play_arrow
+              </span>
+            </button>
+            <button
+              class="mdc-button mdc-button--raised"
+              id="pause"
+              onclick="pause()"
+            >
+              <span class="material-icons">
+                pause
+              </span>
+            </button>
+          </div>
+          <div class="col">
+            <button class="mdc-button mdc-button--raised" onclick="skip()">
+              <span class="material-icons">
+                skip_next
+              </span>
+            </button>
+          </div>
+          <div class="col">
+            <button
+              class="mdc-button mdc-button--raised"
+              onclick="window.location.href = 'stats.html';"
+            >
+              <span class="material-icons">
+                bar_chart
+              </span>
+            </button>
+          </div>
         </div>
       </div>
-
-      <!--canvas-->
-
-      <br />
-
-      <button
-        class="mdc-button mdc-button--raised"
-        onclick="window.location.href = 'ActiveBreak.html';"
-      >
-        <span class="material-icons">
-          skip_previous
-        </span>
-      </button>
-      <button class="mdc-button mdc-button--raised" onclick="startTM()">
-        <span class="material-icons">
-          play_arrow
-        </span>
-      </button>
-      <button class="mdc-button mdc-button--raised" onclick="pause()">
-        <span class="material-icons">
-          pause
-        </span>
-      </button>
-
-      <button class="mdc-button mdc-button--raised" onclick="skip()">
-        <span class="material-icons">
-          skip_next
-        </span>
-      </button>
-
-      <button
-        class="mdc-button mdc-button--raised"
-        onclick="window.location.href = 'stats.html';"
-      >
-        <span class="material-icons">
-          bar_chart
-        </span>
-      </button>
-      <canvas id="myCanvas"></canvas>
-
-      <script type="text/javascript">
-        // Within the script-tag you have to write Javascript
-
-        /*******************************************************
-         * GAME LOGIC VARIABLES
-         *******************************************************/
-
-        const Direction = {
-          UP: 1,
-          RIGHT: 2,
-          DOWN: 3,
-          LEFT: 4
-        };
-
-        var tileSize = 15;
-        var nrOfTilesInX = 50;
-        var nrOfTilesInY = 30;
-
-        var snakeColor = "red";
-        var snakeX = 2;
-        var snakeY = 2;
-        var snakeDirection = Direction.RIGHT;
-
-        var foodColor = "green";
-        var foodX = getRandomNumber(0, nrOfTilesInX - 1);
-        var foodY = getRandomNumber(0, nrOfTilesInY - 1);
-
-        var score = 0;
-
-        /*******************************************************
-         * CANVAS VARIABLES
-         *******************************************************/
-
-        var canvas = document.getElementById("myCanvas");
-        var ctx2 = canvas.getContext("2d");
-
-        ctx2.canvas.width = nrOfTilesInX * tileSize;
-        ctx2.canvas.height = nrOfTilesInY * tileSize;
-
-        /*******************************************************
-         * GAME LOOP
-         *******************************************************/
-
-        function gameLoop() {
-          clearCanvas();
-
-          moveSnake();
-
-          checkFoodCollision();
-          checkWallCollision();
-
-          // draw snake
-          fillTile(snakeX, snakeY, snakeColor);
-
-          // draw food
-          fillTile(foodX, foodY, foodColor);
-
-          drawText(
-            "Score: " + score,
-            "20px Arial",
-            "black",
-            10,
-            canvas.height - 10
-          );
-        }
-
-        /*******************************************************
-         * GAME LOGIC FUNCTIONS
-         *******************************************************/
-
-        function moveSnake() {
-          if (snakeDirection == Direction.UP) {
-            snakeY = snakeY - 1;
-          } else if (snakeDirection == Direction.RIGHT) {
-            snakeX = snakeX + 1;
-          } else if (snakeDirection == Direction.DOWN) {
-            snakeY = snakeY + 1;
-          } else if (snakeDirection == Direction.LEFT) {
-            snakeX = snakeX - 1;
-          }
-        }
-
-        function checkFoodCollision() {
-          if (snakeX == foodX && snakeY == foodY) {
-            score = score + 1;
-            generateNewFood();
-          }
-        }
-
-        function generateNewFood() {
-          foodX = getRandomNumber(0, nrOfTilesInX - 1);
-          foodY = getRandomNumber(0, nrOfTilesInY - 1);
-        }
-
-        function gameOver() {
-          drawText(
-            "Game over!",
-            "60px Arial black",
-            "black",
-            canvas.width / 2 - 200,
-            canvas.height / 2
-          );
-          clearInterval(gameLoopInterval);
-        }
-
-        function checkWallCollision() {
-          // in X direction
-          if (snakeX < 0 || snakeX > nrOfTilesInX) {
-            gameOver();
-          }
-
-          // in Y direction
-          if (snakeY < 0 || snakeY > nrOfTilesInY) {
-            gameOver();
-          }
-        }
-
-        /*******************************************************
-         * DRAWING FUNCTIONS
-         *******************************************************/
-
-        function fillTile(x, y, color) {
-          ctx2.beginPath();
-          ctx2.rect(x * tileSize, y * tileSize, tileSize, tileSize);
-          ctx2.fillStyle = color;
-          ctx2.fill();
-          ctx2.closePath();
-        }
-
-        function clearCanvas() {
-          ctx2.clearRect(0, 0, canvas.width, canvas.height);
-        }
-
-        function drawText(text, font, color, x, y) {
-          ctx2.beginPath();
-          ctx2.font = font;
-          ctx2.fillStyle = color;
-          ctx2.fillText(text, x, y);
-          ctx2.closePath();
-        }
-
-        /*******************************************************
-         * USER INTERACTION FUNCTIONS
-         *******************************************************/
-
-        function controlSnake(currentPose) {
-          if (currentPose.className == "RaisedArms") {
-            //up
-            snakeDirection = Direction.UP;
-          } else if (currentPose.className == "wallsit") {
-            //right
-            snakeDirection = Direction.RIGHT;
-          } else if (currentPose.className == "pause") {
-            //down
-            snakeDirection = Direction.DOWN;
-          } else if (currentPose.className == "standing") {
-            //left
-            snakeDirection = Direction.LEFT;
-          }
-        }
-
-        /*******************************************************
-         * HELPER FUNCTIONS
-         *******************************************************/
-
-        function getRandomNumber(start, end) {
-          return Math.ceil(Math.random() * (end - start) + start);
-        }
-      </script>
-
-      <footer></footer>
-
-      <br />
-
-      <!-- import the Material javascript file -->
     </div>
+
+    <script>
+      function skip() {
+        window.location.href = "OfficeTime.html";
+      }
+
+      function pause() {
+        webcam.pause();
+        isPlaying = false;
+        document.getElementById("pause").style.display = "none";
+        document.getElementById("play").style.display = "block";
+        document.getElementById("myCanvas").style.filter = "blur(10px)";
+        document.getElementById("canvas").style.filter = "grayscale(1)";
+      }
+
+      function play() {
+        webcam.play();
+        isPlaying = true;
+        document.getElementById("pause").style.display = "block";
+        document.getElementById("play").style.display = "none";
+        document.getElementById("myCanvas").style.filter = "none";
+        document.getElementById("canvas").style.filter = "none";
+      }
+      //Button Skirpt
+    </script>
+
+       <footer class="w-100 d-flex justify-content-center align-items-center fixed-bottom bg-primary">
+      <li><a href="readme.md">Documentation</a></li>
+      <li><a href="https://github.com/blckxsepia/BachelorThesis">Git</a></li>
+      <li><a href="/index_preview.html">link to bootstrap doku</a></li>
+      <li>
+        <a href="https://www.tensorflow.org/guide">link to tensor flow </a>
+      </li>
+      <li>
+        <a href="https://github.com/tensorflow/tfjs-models/tree/master/posenet"
+          >pose net</a
+        >
+      </li>
+      <li>
+        <a
+          href="https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/pose"
+          >google teachable maschine
+        </a>
+      </li>
+      &#169; 2020 Pia Korndörfer
+    </footer>
+
+    <!-- import the Material javascript file -->
+    <script src="components.dll.js"></script>
+    <script src="bundle.js"></script>
   </main>
-  <script>
-    //DAS IST MEIN CODE |
-    //                  v
-
-    // More API functions here:
-    // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/pose
-
-    // the link to your model provided by Teachable Machine export panel
-    const URL = "https://teachablemachine.withgoogle.com/models/vxiow7xHt/";
-    let model, webcam, ctx, labelContainer, maxPredictions;
-    var TM = document.getElementById("TM");
-    var indexExercises = 0;
-
-    async function init() {
-      //ausführungen beim starten
-      startTM();
-      progress(durBreak, durBreak, $("#progressBar"));
-    }
-
-    async function startTM() {
-      const modelURL = URL + "model.json";
-      const metadataURL = URL + "metadata.json";
-
-      // load the model and metadata
-      // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
-      // Note: the pose library adds a tmPose object to your window (window.tmPose)
-      model = await tmPose.load(modelURL, metadataURL);
-      maxPredictions = model.getTotalClasses();
-
-      // Convenience function to setup a webcam
-      const size = document.getElementById("exercise").firstChild.width;
-      const flip = true; // whether to flip the webcam
-      webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
-      await webcam.setup(); // request access to the webcam
-      await webcam.play();
-      window.requestAnimationFrame(loop);
-
-      // append/get elements to the DOM
-      const canvas = document.getElementById("canvas");
-      canvas.width = size;
-      canvas.height = size;
-      ctx = canvas.getContext("2d");
-      labelContainer = document.getElementById("label-container");
-      for (let i = 0; i < maxPredictions; i++) {
-        // and class labels
-        labelContainer.appendChild(document.createElement("div"));
-      }
-      TM.style.display = "block";
-    }
-
-    async function loop(timestamp) {
-      webcam.update(); // update the webcam frame
-      await predict();
-      window.requestAnimationFrame(loop);
-    }
-    var currentPose;
-
-    async function predict() {
-      // Prediction #1: run input through posenet
-      // estimatePose can take in an image, video or canvas html element
-      const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
-      // Prediction 2: run input through teachable machine classification model
-      const prediction = await model.predict(posenetOutput);
-      var probability = prediction[indexExercises].probability;
-      currentPose = getMax(prediction);
-      //var max = Math.max.apply(Math, prediction.map(function(o) { return o.className; }))// Array Prediction wird in Map geschrieben und nach Maximum durchsucht
-      showFeedback(probability, currentPose.className);
-      controlSnake(currentPose);
-
-      for (let i = 0; i < maxPredictions; i++) {
-        const classPrediction =
-          prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-        labelContainer.childNodes[i].innerHTML = classPrediction;
-      }
-
-      // finally draw the poses
-      drawPose(pose);
-    }
-    function getMax(prediction) {
-      var max;
-      for (var i = 0; i < prediction.length; i++) {
-        if (
-          max == null ||
-          parseInt(prediction[i].probability.toFixed(2)) >
-            parseInt(max.probability.toFixed(2))
-        )
-          max = prediction[i];
-      }
-      return max;
-    }
-    //TODO
-    function showFeedback(probability, currentPose) {
-      var exerciseId = exercises[indexExercises].exerciseId;
-      document.getElementById("exerciseName").innerHTML =
-        "name: " + currentPose;
-      if (currentPose == exerciseId) {
-        document.getElementById("feedback").innerHTML = "Feedback: GOOD";
-      } else {
-        document.getElementById("feedback").innerHTML =
-          "Feedback: Wrong Exercise";
-      }
-    }
-
-    function drawPose(pose) {
-      if (webcam.canvas) {
-        ctx.drawImage(webcam.canvas, 0, 0);
-        // draw the keypoints and skeleton
-        if (pose) {
-          const minPartConfidence = 0.5;
-          tmPose.drawKeypoints(pose.keypoints, minPartConfidence, ctx);
-          tmPose.drawSkeleton(pose.keypoints, minPartConfidence, ctx);
-        }
-      }
-    }
-    var gameLoopInterval = setInterval(gameLoop, 500);
-
-    var aud = document.getElementById("aud");
-    aud.load();
-    aud.autoplay = true;
-    aud.play();
-
-    //ProgressBar
-    var exercises = [
-      {
-        exerciseId: "raisedArms",
-        exerciseName: "Raised Arms",
-        alt: "Raised Arms",
-        url:
-          "https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2Fgif_raised_arms.gif?v=1596619843770"
-      },
-      {
-        exerciseId: "wallsit",
-        exerciseName: "Squad",
-        alt: "Squad",
-        url:
-          "https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2Fgif_squats_red.gif?v=1596619838934"
-      },
-      {
-        exerciseId: "march",
-        exerciseName: "March",
-        alt: "March",
-        url:
-          "https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2Fgif-march-red.gif?v=1596619836208"
-      }
-    ];
-    var numberOfExercises = exercises.length; //(länge des Arrays)
-    var durBreak = localStorage.getItem("durBreak") * 60;
-    var timeleft = durBreak;
-    const intervall = timeleft / numberOfExercises;
-
-    function progress(timeleft, timetotal, $element) {
-      var progressBarWidth = (timeleft * $element.width()) / timetotal;
-      drawExercise(timeleft);
-
-      $element
-        .find("div")
-        .animate({ width: progressBarWidth }, 500)
-        .html(Math.floor(timeleft / 60) + ":" + (timeleft % 60));
-      if (timeleft > 0 && TM.style.display == "block") {
-        setTimeout(function() {
-          progress(timeleft - 1, timetotal, $element);
-        }, 1000);
-      } else {
-        setTimeout(function() {
-          progress(timeleft, timetotal, $element);
-        }, 1000);
-      }
-    }
-
-    function drawExercise(timeleft) {
-      var timeTillNextExercise = timeleft % intervall;
-      document.getElementById("nextExercise").innerHTML =
-        "Time Left Till Next Exercise: " + timeTillNextExercise;
-      if (timeleft == 0) {
-        skip();
-      }
-
-      if (timeTillNextExercise == 0) {
-        //1 mal je intervall Bildwechsel
-        showNextExercise();
-      }
-      if (timeTillNextExercise == 1 && timeleft > 1) {
-        //1 mal je intervall Bildwechsel
-        indexExercises++;
-        showNextExercise();
-      }
-    }
-
-    function showNextExercise() {
-      var prevImg = document.getElementById("exercise").childNodes[0];
-      var prevP = document.getElementById("exercise").childNodes[1];
-      var img = document.createElement("img");
-      var p = document.createElement("p");
-      img.src = exercises[indexExercises].url; //url
-      img.alt = exercises[indexExercises].alt; //alt
-      p.innerHTML = exercises[indexExercises].exerciseName; //label
-      exercise.replaceChild(img, prevImg);
-      exercise.replaceChild(p, prevP);
-    }
-
-    function pause() {
-      TM.style.display = "none";
-      var prevImg = document.getElementById("exercise").childNodes[0];
-      var prevP = document.getElementById("exercise").childNodes[1];
-      exercise.removeChild(prevImg);
-      exercise.removeChild(prevP);
-      webcam.stop();
-    }
-//todo: pause function
-    function skip() {
-      window.location.href = "index.html";
-    }
-  </script>
 </body>
-<!--TM-->

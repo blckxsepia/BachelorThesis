@@ -39,6 +39,10 @@ module.exports = [
       new HtmlWebpackPlugin({
         filename: "stats.html",
         template: "stats.html"
+      }),
+      new HtmlWebpackPlugin({
+        filename: "OfficeTime.html",
+        template: "OfficeTime.html"
       })
     ],
     module: {

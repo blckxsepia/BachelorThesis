@@ -5,8 +5,9 @@
 /*  Typography */
 // To change your theme's typography, we recommend importing a font from Google Fonts and setting the global font-family https://fonts.google.com
 
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
-$mdc-typography-font-family: unquote("Roboto, sans-serif");
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;400&display=swap');
+$mdc-typography-font-family: unquote("Source Sans Pro, sans-serif;");
+
 
 
 /* Shape */
