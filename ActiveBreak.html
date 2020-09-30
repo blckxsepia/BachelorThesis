@@ -114,7 +114,7 @@
             var isPlaying = true;
 
             const URL =
-              "https://teachablemachine.withgoogle.com/models/vxiow7xHt/";
+              "https://teachablemachine.withgoogle.com/models/KKVYdfU1A/";
             let model, webcam, ctx, labelContainer, maxPredictions;
             var indexExercises = 0;
             var difficulty = 4;
@@ -139,14 +139,12 @@
                 setTimeout(function() {
                   progress(timeleft - 1, timetotal);
                 }, 1000);
-              }
-              else if (timeleft == 0) {
+              } else if (timeleft == 0) {
                 setTimeout(function() {
                   progress(timeleft, timetotal);
                 }, 1000);
                 skip();
-              } 
-              else {
+              } else {
                 setTimeout(function() {
                   progress(timeleft, timetotal);
                 }, 1000);
@@ -178,8 +176,8 @@
             };
 
             var tileSize = 10;
-            var nrOfTilesInX = 50;
-            var nrOfTilesInY = 30;
+            var nrOfTilesInX = 40;
+            var nrOfTilesInY = 40;
 
             var snakeColor = "#FFCF00";
             var snakeX = 2;
@@ -313,19 +311,47 @@
              * USER INTERACTION FUNCTIONS
              *******************************************************/
 
+            var delayInMilliseconds = 2000; //1 second
+
             function controlSnake(currentPose) {
-              if (currentPose.className == "RaisedArms") {
-                //up
+              if (currentPose.className == "up") {
                 snakeDirection = Direction.UP;
-              } else if (currentPose.className == "wallsit") {
+                document.getElementById("up_red").style.display = "none";
+                document.getElementById("up_green").style.display = "block";
+                setTimeout(function() {
+                  document.getElementById("up_red").style.display = "block";
+                  document.getElementById("up_green").style.display = "none";
+                }, delayInMilliseconds);
+              } else if (currentPose.className == "right") {
                 //right
                 snakeDirection = Direction.RIGHT;
-              } else if (currentPose.className == "pause") {
+                document.getElementById("right_red").style.display = "none";
+                document.getElementById("right_green").style.display = "block";
+                setTimeout(function() {
+                  document.getElementById("right_red").style.display = "block";
+                  document.getElementById("right_green").style.display = "none";
+                }, delayInMilliseconds);
+              } else if (currentPose.className == "down") {
                 //down
                 snakeDirection = Direction.DOWN;
-              } else if (currentPose.className == "standing") {
+                document.getElementById("down_red").style.display = "none";
+                document.getElementById("down_green").style.display = "block";
+                setTimeout(function() {
+                  document.getElementById("down_red").style.display = "block";
+                  document.getElementById("down_green").style.display = "none";
+                }, delayInMilliseconds);
+              } else if (currentPose.className == "left") {
                 //left
                 snakeDirection = Direction.LEFT;
+                document.getElementById("left_red").style.display = "none";
+                document.getElementById("left_green").style.display = "block";
+                setTimeout(function() {
+                  document.getElementById("left_red").style.display = "block";
+                  document.getElementById("left_green").style.display = "none";
+                }, delayInMilliseconds);
+              } else if (currentPose.className == "pause") {
+                //left
+              } else if (currentPose.className == "standing") {
               }
             }
 
@@ -418,7 +444,6 @@
               }
 
               function showFeedback(probability, currentPose) {
-                var exerciseId = exercises[indexExercises].exerciseId;
                 document.getElementById("exerciseName").innerHTML =
                   "name: " + currentPose;
               }
@@ -442,52 +467,62 @@
               aud.load();
               aud.autoplay = true;
               aud.play();
-
-              var exercises = [
-                {
-                  exerciseId: "raisedArms",
-                  exerciseName: "Raised Arms",
-                  alt: "Raised Arms",
-                  url:
-                    "https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2Fgif_raised_arms.gif?v=1596619843770"
-                },
-                {
-                  exerciseId: "wallsit",
-                  exerciseName: "Squad",
-                  alt: "Squad",
-                  url:
-                    "https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2Fgif_squats_red.gif?v=1596619838934"
-                },
-                {
-                  exerciseId: "march",
-                  exerciseName: "March",
-                  alt: "March",
-                  url:
-                    "https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2Fgif-march-red.gif?v=1596619836208"
-                }
-              ];
-              var numberOfExercises = exercises.length;
             </script>
             <div id="TM">
               <div id="infoButtons">
                 <div class="row" style="height:100%">
                   <div class="col"></div>
                   <div class="col">
-                    <img src="https://dummyimage.com/48/000000/fff.png" />
+                    <img
+                      id="up_red"
+                      src="https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2Fstretch_up_red.svg?v=1601384291929"
+                    />
+                    <img
+                      id="up_green"
+                      style="display:none"
+                      src="https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2Fstretch_up_green.svg?v=1601384291714"
+                    />
                   </div>
                   <div class="col"></div>
                   <div class="w-100"></div>
                   <div class="col">
-                    <img src="https://dummyimage.com/48/000000/fff.png" />
+                    <img
+                      id="left_red"
+                      src="https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2Fstretch_side_red.svg?v=1601384291613"
+                    />
+                    <img
+                      id="left_green"
+                      style="display:none"
+                      src="https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2Fstretch_side_green.svg?v=1601384291668"
+                    />
                   </div>
                   <div class="col"></div>
                   <div class="col">
-                    <img src="https://dummyimage.com/48/000000/fff.png" />
+                    <img
+                      id="right_red"
+                      style="filter: -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);"
+                      src="https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2Fstretch_side_red.svg?v=1601384291613"
+                    />
+                    <img
+                      id="right_green"
+                      style=" -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);display:none;"
+                      src="https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2Fstretch_up_green.svg?v=1601384291714"
+                    />
                   </div>
                   <div class="w-100"></div>
                   <div class="col"></div>
                   <div class="col">
-                    <img src="https://dummyimage.com/48/000000/fff.png" />
+                    <img
+                      id="down_red"
+                      src="https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2Ffeet_to_toe_red.svg?v=1601384292449"
+                    />
+                    <img
+                      id="down_green"
+                      style="display:none"
+                      src="https://cdn.glitch.com/344122ff-b96f-4b0e-b327-a5fea0abf4a7%2Ffeet_to_toe_green.svg?v=1601384291884"
+                    />
                   </div>
                   <div class="col"></div>
                 </div>
@@ -580,7 +615,9 @@
       //Button Skirpt
     </script>
 
-       <footer class="w-100 d-flex justify-content-center align-items-center fixed-bottom bg-primary">
+    <footer
+      class="w-100 d-flex justify-content-center align-items-center fixed-bottom bg-primary"
+    >
       <li><a href="readme.md">Documentation</a></li>
       <li><a href="https://github.com/blckxsepia/BachelorThesis">Git</a></li>
       <li><a href="/index_preview.html">link to bootstrap doku</a></li>
