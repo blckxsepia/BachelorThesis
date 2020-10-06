@@ -16,19 +16,43 @@ main{
   width:100%;
 }
 #infoButtons{
-  z-index:100;
+  z-index:2;
   position:absolute;
   padding:2rem;
   width:400px;
   height:400px;
   
 }
+#myCanvas{
+  background-color:#410F57;
+}
 #infoButtons img{
   height:5rem;
   background-color:#FFCF00;
   border-radius:4rem;
   opacity: 0.5;
+  position:absolute;
+  z-index:1;
 }
+
+#infoButtons span{
+  position:absolute;
+  z-index:2;
+  display: block;
+   margin: 0;
+}
+#infoButtons div.col{
+ display: flex;
+  align-items: center;
+}
+
+
+
+
+#pg{
+  display:none;
+}
+
 h1, h2, h3, h4, h5, h6{
   font-family: flood-std, sans-serif;
 

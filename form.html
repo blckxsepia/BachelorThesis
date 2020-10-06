@@ -147,38 +147,41 @@
           <div class="card w-75">
             <div class="card-body">
               <fieldset>
-                <label for="WindowFront">Bring Window to Front</label><br />
-                <small
+                <label for="WindowFront">Bring Window to Front </label><br />
+               <small
                   >if toggled on, this window will come to front when your
                   ActiveBreak starts</small
                 ><br />
+<div class="mdc-switch">
+  <div class="mdc-switch__track"></div>
+  <div class="mdc-switch__thumb-underlay">
+    <div class="mdc-switch__thumb"></div>
+    <input type="checkbox" id="windowFront" class="mdc-switch__native-control" role="switch" aria-checked="false">
+  </div>
+</div>
 
-                <input
-                  type="checkbox"
-                  id="WindowFront"
-                  name="WindowFront"
-                  value="true"
-                  required
-                />
+
+        
               </fieldset>
             </div>
           </div>
           <div class="card w-75">
             <div class="card-body">
               <fieldset>
-                <label for="Notification">Bring Window to Front</label><br />
-                <small
-                  >if toggled on, this window will come to front when your
-                  ActiveBreak starts</small
+                <label for="Notification">Play Notification Sound</label><br />
+                 <small
+                  >if toggled on, ActiveBreaker will notify you with a sound at the beginning and ending of your Active Break </small
                 ><br />
+                
+<div class="mdc-switch">
+  <div class="mdc-switch__track"></div>
+  <div class="mdc-switch__thumb-underlay">
+    <div class="mdc-switch__thumb"></div>
+    <input type="checkbox" id="notification" class="mdc-switch__native-control" role="switch" aria-checked="false">
+  </div>
+</div>
 
-                <input
-                  type="checkbox"
-                  id="Notification"
-                  name="Notification"
-                  value="true"
-                  required
-                />
+                
               </fieldset>
             </div>
           </div>
@@ -205,14 +208,18 @@
           var form;
           var durWork;
           var durBreak;
-          var durOwnWork;
-          var durOwnBreak;
+          var windowFront;
+          var notification;
 
           function saveSettings(durWork, durBreak) {
             durBreak = document.getElementById("durBreak").value;
             durWork = document.getElementById("durWork").value;
+            windowFront = document.getElementById("windowFront").value;
+            notification = document.getElementById("notification").value;
             localStorage.setItem("durBreak", durBreak);
             localStorage.setItem("durWork", durWork);
+            localStorage.setItem("windowFront", windowFront);
+            localStorage.setItem("notification", notification);
             window.location.href = "ActiveBreak.html";
           }
         </script>
